@@ -6,7 +6,7 @@ TEST(VitalsTest, BPM) {
 }
  
 TEST(VitalsTest, SPO2) {
-    ASSERT_EQ(false, vitalsAreOk(100, 40, 50));
+    ASSERT_EQ(true, vitalsAreOk(100, 40, 50));
 }
  
 int main(int argc, char **argv) {
