@@ -1,4 +1,3 @@
-#include <paramchecker.h>
 bool vitalBmpOk(float bpm);
 bool vitalSpo2Ok(float spo2);
 bool vitalrespRateOk(float respRate);
