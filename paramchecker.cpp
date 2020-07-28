@@ -35,7 +35,7 @@ bool vitalrespRateOk(float respRate)
 bool vitalsAreOk(float bpm, float spo2, float respRate) {
   bool retValue = false;
   
- if(vitalSpo2Ok(spo2) & vitalBmpOk(bpm) & vitalrespRateOk(respRate))
+ if((vitalSpo2Ok(spo2)) & (vitalBmpOk(bpm)) & (vitalrespRateOk(respRate)))
    retValue = true;
     
   return retValue;
