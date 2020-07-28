@@ -1,12 +1,8 @@
 #include <paramchecker.h>
-bool vitalsAreOk(float bpm, float spo2, float respRate) {
-  bool retValue = false;
-  
- if(vitalSpo2Ok(spo2) & vitalBmpOk(bpm) & vitalrespRateOk(respRate))
-   retValue = true;
-    
-  return retValue;
-}
+bool vitalBmpOk(float bpm);
+bool vitalSpo2Ok(float spo2);
+bool vitalrespRateOk(float respRate);
+
 
 bool vitalBmpOk(float bpm)
 {
@@ -35,4 +31,13 @@ bool vitalrespRateOk(float respRate)
     retValue =  false;
   } 
    return retValue;
+}
+
+bool vitalsAreOk(float bpm, float spo2, float respRate) {
+  bool retValue = false;
+  
+ if(vitalSpo2Ok(spo2) & vitalBmpOk(bpm) & vitalrespRateOk(respRate))
+   retValue = true;
+    
+  return retValue;
 }
