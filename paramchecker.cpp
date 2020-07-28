@@ -30,6 +30,7 @@ bool vitalSpo2Ok(float spo2)
 }
 bool vitalrespRateOk(float respRate)
 {
+   bool retValue = true;
   if(respRate < 30 || respRate > 60) {
     retValue =  false;
   } 
