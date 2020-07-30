@@ -47,3 +47,43 @@ bool vitalsAreOk(float bpm, float spo2, float respRate) {
   */
   return retValue;
 }
+//==========================================================================//
+class IPrintScan
+{
+	public:
+	doJob() = 0;
+}	
+
+
+class CPrinter: public IPrintScan
+{
+	public:
+	
+	void doJob(void)
+	{
+		//
+	}
+	
+}
+
+class CScan: public IPrintScan
+{
+	public:
+	
+	void doJob(void)
+	{
+		//
+	}
+	
+}
+
+
+void PrinterManager(IPrintScan* obj)
+{
+	obj.doJob();
+}
+
+void ScanManager(IPrintScan* obj)
+{
+	obj.doJob();
+}
