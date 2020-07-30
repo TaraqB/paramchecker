@@ -1,89 +1,19 @@
-bool vitalBmpOk(float bpm);
-bool vitalSpo2Ok(float spo2);
-bool vitalrespRateOk(float respRate);
-bool isVitalOk(float value,float min, float max);
+#include "paramchecker.h"
+#include <vector>
+#include <iostream>
 
-bool isVitalOk(float value,float min, float max)
-{
-  bool retValue = true;
-  
-  if((value < min) && (value > max) ) retValue =false;
-  
-  return retValue;
-}
+IVitalCheck* vitalCheckers[] = {
+  [bpm] = new VitalRangeCheck(70, 150),
+  [spo2] = new VitalRangeCheck(80, 100),
+  [respRate] = new VitalRangeCheck(30, 60),
+  [avgECG] = new VitalValueCheck(0),
+};
 
-bool vitalBmpOk(float bpm)
-{
-  bool retValue = false;
-  
-  if(isVitalOk(bpm,70,150)) retValue = true;
-  
-  return retValue;
-}
-
-
-bool vitalSpo2Ok(float spo2)
-{
-  bool retValue = false;
-   if(isVitalOk(spo2,80,100)) retValue = true;
-   return retValue;
-}
-bool vitalrespRateOk(float respRate)
-{
- bool retValue = false;
-   if(isVitalOk(respRate,30,60)) retValue = true;
-   return retValue;
-}
-
-bool vitalsAreOk(float bpm, float spo2, float respRate) {
-  bool retValue = false;
-  
- if((vitalSpo2Ok(spo2)) & (vitalBmpOk(bpm)) & (vitalrespRateOk(respRate)))
-   retValue = true;
-   
-  /*
-  if((isVitalOk(bpm,70,150)) && (isVitalOk(spo2,80,100)) && (isVitalOk(respRate,30,60)))
-    retValue = true;
-  */
-  return retValue;
-}
-//==========================================================================//
-class IPrintScan
-{
-	public:
-	doJob() = 0;
-}	
-
-
-class CPrinter: public IPrintScan
-{
-	public:
-	
-	void doJob(void)
-	{
-		//
-	}
-	
-}
-
-class CScan: public IPrintScan
-{
-	public:
-	
-	void doJob(void)
-	{
-		//
-	}
-	
-}
-
-
-void PrinterManager(IPrintScan* obj)
-{
-	obj.doJob();
-}
-
-void ScanManager(IPrintScan* obj)
-{
-	obj.doJob();
+std::vector<bool> vitalsAreOk(const std::vector<Measurement>& measurements) {
+  std::vector<bool> results;
+  for(auto t = measurements.begin(); t != measurements.end(); t++) {
+    bool vitalResult = vitalCheckers[t->id]->measurementIsOk(t->measured_value);
+    std::cout << "Vital-check result is " << vitalResult << std::endl;
+  }
+  return results;
 }
